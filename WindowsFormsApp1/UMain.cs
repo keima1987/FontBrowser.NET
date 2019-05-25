@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
+using Ookii.Dialogs;
 
 
 
@@ -21,8 +22,10 @@ namespace WindowsFormsApp1
         public frmMain()
         {
             InitializeComponent();
-            
+
         }
+
+
 
         public void LoadFonts()
         {
@@ -32,62 +35,83 @@ namespace WindowsFormsApp1
             //TTF Font Files
             FileInfo[] Files = d.GetFiles("*.ttf"); //Getting Text files
             string str = "";
+            var ttfcount = 0;
             foreach (FileInfo file in Files)
             {
                 str = file.Name;
-                cbFonts.Items.Add(str);
+                lbFonts.Items.Add(str);
                 PrivateFontCollection fontCol = new PrivateFontCollection();
                 fontCol.AddFontFile(@CurrentFolder + "\\" + str);
-                lbFonts.Items.Add(fontCol.Families[0].Name);
+                if (!cbFonts.Items.Contains(fontCol.Families[0].Name))
+                {
+                    cbFonts.Items.Add(fontCol.Families[0].Name);
+                    ttfcount++;
+                }
+                else
+                {
+                    lbFonts.Items.RemoveAt(ttfcount);
+                }
             }
             //OTF Font Files
             FileInfo[] FilesO = d.GetFiles("*.otf"); //Getting Text files
             string strO = "";
+            var otfcount = 0;
             foreach (FileInfo fileO in FilesO)
             {
                 strO = fileO.Name;
-                cbFonts.Items.Add(strO);
+                lbFonts.Items.Add(strO);
                 PrivateFontCollection fontCol = new PrivateFontCollection();
                 fontCol.AddFontFile(@CurrentFolder + "\\" + strO);
-                lbFonts.Items.Add(fontCol.Families[0].Name);
+                if (!cbFonts.Items.Contains(fontCol.Families[0].Name))
+                {
+                    cbFonts.Items.Add(fontCol.Families[0].Name);
+                    otfcount++;
+                }
+                else
+                {
+                    lbFonts.Items.RemoveAt(ttfcount+otfcount);
+                }
             }
         }
 
         public FontStyle SetFontStyle(int cbSelectedIndex)
         {
-            switch (cbSelectedIndex) {
+            switch (cbSelectedIndex)
+            {
                 case 0:
-                {
-                    return FontStyle.Regular;
-                }
+                    {
+                        return FontStyle.Regular;
+                    }
                 case 1:
                     {
                         return FontStyle.Bold;
                     }
                 case 2:
                     {
-                        return FontStyle.Italic; 
+                        return FontStyle.Italic;
                     }
                 case 3:
                     {
                         return FontStyle.Bold | FontStyle.Italic;
                     }
-                default: return FontStyle.Regular; 
+                default: return FontStyle.Regular;
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadFonts();
+            lbFonts.SelectedIndex = 0;
             cbFonts.SelectedIndex = 0;
             cbStyle.SelectedIndex = 0;
             lblStatusFolder.Text = CurrentFolder;
             sbFolder.Refresh();
             lblSample.Text = edtSample.Text;
             PrivateFontCollection fontCol = new PrivateFontCollection();
-            fontCol.AddFontFile(@CurrentFolder + "\\" + cbFonts.Text);
+            fontCol.AddFontFile(@CurrentFolder + "\\" + lbFonts.Text);
             lblSample.Font = new Font(fontCol.Families[0], (float)speSize.Value, SetFontStyle(cbStyle.SelectedIndex));
             lblSample.Text = fontCol.Families[0].Name;
+
 
         }
 
@@ -95,45 +119,24 @@ namespace WindowsFormsApp1
         {
             lbFonts.SelectedIndex = cbFonts.SelectedIndex;
             PrivateFontCollection fontCol = new PrivateFontCollection();
-            fontCol.AddFontFile(@CurrentFolder + "\\" + cbFonts.Text);
+            fontCol.AddFontFile(@CurrentFolder + "\\" + lbFonts.Text);
             lblSample.Font = new Font(fontCol.Families[0], (float)speSize.Value, SetFontStyle(cbStyle.SelectedIndex));
-            lblSample.Text = fontCol.Families[0].Name;
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cbFonts.SelectedIndex = lbFonts.SelectedIndex;
-        }
-
-        private void btnOpenFolder_Click(object sender, EventArgs e)
-        {
-            dlgFolder.SelectedPath = CurrentFolder;
-            if (dlgFolder.ShowDialog() == DialogResult.OK)
+            if (String.IsNullOrEmpty(edtSample.Text))
             {
-                CurrentFolder = dlgFolder.SelectedPath;
-                lblStatusFolder.Text = CurrentFolder;
-                sbFolder.Refresh();
-                LoadFonts();
+                lblSample.Text = fontCol.Families[0].Name;
+            }
+            else
+            {
+                lblSample.Text = edtSample.Text;
             }
         }
 
-        private void btnWindowsFolder_Click(object sender, EventArgs e)
-        {
-            CurrentFolder = CurrentFolder = "C:\\Windows\\Fonts";
-            lblStatusFolder.Text = CurrentFolder;
-            sbFolder.Refresh();
-            LoadFonts();
-
-        }
 
         private void cbStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblSample.Font = new Font(lbFonts.Text, (float)speSize.Value, SetFontStyle(cbStyle.SelectedIndex));
-        }
-
-        private void dlgFolder_HelpRequest(object sender, EventArgs e)
-        {
-
+            PrivateFontCollection fontCol = new PrivateFontCollection();
+            fontCol.AddFontFile(@CurrentFolder + "\\" + lbFonts.Text);
+            lblSample.Font = new Font(fontCol.Families[0], (float)speSize.Value, SetFontStyle(cbStyle.SelectedIndex));
         }
 
         private void edtSample_TextChanged(object sender, EventArgs e)
@@ -143,7 +146,45 @@ namespace WindowsFormsApp1
 
         private void speSize_ValueChanged(object sender, EventArgs e)
         {
-            lblSample.Font = new Font(lbFonts.Text, (float)speSize.Value, SetFontStyle(cbStyle.SelectedIndex));
+            PrivateFontCollection fontCol = new PrivateFontCollection();
+            fontCol.AddFontFile(@CurrentFolder + "\\" + lbFonts.Text);
+            lblSample.Font = new Font(fontCol.Families[0], (float)speSize.Value, SetFontStyle(cbStyle.SelectedIndex));
+        }
+
+        private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VistaFolderBrowserDialog dlgVistaFolder = new VistaFolderBrowserDialog(); // Ookii.Dialogs
+            dlgVistaFolder.SelectedPath = CurrentFolder;
+            if (dlgVistaFolder.ShowDialog() == DialogResult.OK)
+            {
+                CurrentFolder = dlgVistaFolder.SelectedPath;
+                lblStatusFolder.Text = CurrentFolder;
+                sbFolder.Refresh();
+                LoadFonts();
+                cbFonts.SelectedIndex = 0;
+            }
+        }
+
+        private void windowsFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            CurrentFolder = CurrentFolder = "C:\\Windows\\Fonts";
+            lblStatusFolder.Text = CurrentFolder;
+            sbFolder.Refresh();
+            LoadFonts();
+            cbFonts.SelectedIndex = 0;
+        }
+
+        private void mmiExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            lblSample.Width = ClientRectangle.Width - 31;
+            lblSample.Height = ClientRectangle.Height - 168;
+            edtSample.Width = ClientRectangle.Width - 31;
         }
     }
 }

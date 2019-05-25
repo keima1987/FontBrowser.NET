@@ -33,43 +33,46 @@
             this.cbFonts = new System.Windows.Forms.ComboBox();
             this.speSize = new System.Windows.Forms.NumericUpDown();
             this.cbStyle = new System.Windows.Forms.ComboBox();
-            this.btnOpenFolder = new System.Windows.Forms.Button();
-            this.btnWindowsFolder = new System.Windows.Forms.Button();
             this.edtSample = new System.Windows.Forms.TextBox();
-            this.lblSampleDesc = new System.Windows.Forms.Label();
             this.lblSample = new System.Windows.Forms.Label();
             this.lblFontName = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.lblFontStyle = new System.Windows.Forms.Label();
-            this.dlgFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.sbFolder = new System.Windows.Forms.StatusStrip();
             this.lblStatusFolder = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mmiMain = new System.Windows.Forms.MenuStrip();
+            this.mmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mmiOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.mmiWindowsFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mmiExit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.speSize)).BeginInit();
             this.sbFolder.SuspendLayout();
+            this.mmiMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbFonts
             // 
             this.lbFonts.FormattingEnabled = true;
-            this.lbFonts.Location = new System.Drawing.Point(376, 80);
+            this.lbFonts.Location = new System.Drawing.Point(369, 141);
             this.lbFonts.Name = "lbFonts";
-            this.lbFonts.Size = new System.Drawing.Size(120, 342);
+            this.lbFonts.Size = new System.Drawing.Size(120, 134);
             this.lbFonts.TabIndex = 0;
-            this.lbFonts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.lbFonts.Visible = false;
             // 
             // cbFonts
             // 
             this.cbFonts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFonts.FormattingEnabled = true;
-            this.cbFonts.Location = new System.Drawing.Point(12, 25);
+            this.cbFonts.Location = new System.Drawing.Point(12, 48);
             this.cbFonts.Name = "cbFonts";
-            this.cbFonts.Size = new System.Drawing.Size(161, 21);
+            this.cbFonts.Size = new System.Drawing.Size(293, 21);
             this.cbFonts.TabIndex = 1;
             this.cbFonts.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // speSize
             // 
-            this.speSize.Location = new System.Drawing.Point(183, 25);
+            this.speSize.Location = new System.Drawing.Point(311, 49);
             this.speSize.Minimum = new decimal(new int[] {
             1,
             0,
@@ -94,62 +97,33 @@
             "Bold",
             "Italic",
             "Bold Italic"});
-            this.cbStyle.Location = new System.Drawing.Point(245, 25);
+            this.cbStyle.Location = new System.Drawing.Point(369, 48);
             this.cbStyle.Name = "cbStyle";
             this.cbStyle.Size = new System.Drawing.Size(121, 21);
             this.cbStyle.TabIndex = 3;
             this.cbStyle.SelectedIndexChanged += new System.EventHandler(this.cbStyle_SelectedIndexChanged);
             // 
-            // btnOpenFolder
-            // 
-            this.btnOpenFolder.Location = new System.Drawing.Point(373, 11);
-            this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(123, 23);
-            this.btnOpenFolder.TabIndex = 4;
-            this.btnOpenFolder.Text = "&Open Folder";
-            this.btnOpenFolder.UseVisualStyleBackColor = true;
-            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
-            // 
-            // btnWindowsFolder
-            // 
-            this.btnWindowsFolder.Location = new System.Drawing.Point(373, 40);
-            this.btnWindowsFolder.Name = "btnWindowsFolder";
-            this.btnWindowsFolder.Size = new System.Drawing.Size(123, 23);
-            this.btnWindowsFolder.TabIndex = 5;
-            this.btnWindowsFolder.Text = "&Windows Folder";
-            this.btnWindowsFolder.UseVisualStyleBackColor = true;
-            this.btnWindowsFolder.Click += new System.EventHandler(this.btnWindowsFolder_Click);
-            // 
             // edtSample
             // 
-            this.edtSample.Location = new System.Drawing.Point(12, 52);
+            this.edtSample.Location = new System.Drawing.Point(12, 75);
+            this.edtSample.Multiline = true;
             this.edtSample.Name = "edtSample";
-            this.edtSample.Size = new System.Drawing.Size(354, 20);
+            this.edtSample.Size = new System.Drawing.Size(477, 60);
             this.edtSample.TabIndex = 6;
-            this.edtSample.Text = "Sample";
             this.edtSample.TextChanged += new System.EventHandler(this.edtSample_TextChanged);
-            // 
-            // lblSampleDesc
-            // 
-            this.lblSampleDesc.AutoSize = true;
-            this.lblSampleDesc.Location = new System.Drawing.Point(12, 75);
-            this.lblSampleDesc.Name = "lblSampleDesc";
-            this.lblSampleDesc.Size = new System.Drawing.Size(42, 13);
-            this.lblSampleDesc.TabIndex = 7;
-            this.lblSampleDesc.Text = "Sample";
             // 
             // lblSample
             // 
-            this.lblSample.Location = new System.Drawing.Point(12, 99);
+            this.lblSample.Location = new System.Drawing.Point(12, 151);
             this.lblSample.Name = "lblSample";
-            this.lblSample.Size = new System.Drawing.Size(354, 323);
+            this.lblSample.Size = new System.Drawing.Size(477, 294);
             this.lblSample.TabIndex = 8;
-            this.lblSample.Text = "label2";
+            this.lblSample.Text = "Sample Label";
             // 
             // lblFontName
             // 
             this.lblFontName.AutoSize = true;
-            this.lblFontName.Location = new System.Drawing.Point(12, 9);
+            this.lblFontName.Location = new System.Drawing.Point(12, 32);
             this.lblFontName.Name = "lblFontName";
             this.lblFontName.Size = new System.Drawing.Size(59, 13);
             this.lblFontName.TabIndex = 9;
@@ -158,7 +132,7 @@
             // lblSize
             // 
             this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(180, 9);
+            this.lblSize.Location = new System.Drawing.Point(308, 33);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(51, 13);
             this.lblSize.TabIndex = 10;
@@ -167,25 +141,19 @@
             // lblFontStyle
             // 
             this.lblFontStyle.AutoSize = true;
-            this.lblFontStyle.Location = new System.Drawing.Point(242, 9);
+            this.lblFontStyle.Location = new System.Drawing.Point(366, 32);
             this.lblFontStyle.Name = "lblFontStyle";
             this.lblFontStyle.Size = new System.Drawing.Size(54, 13);
             this.lblFontStyle.TabIndex = 11;
             this.lblFontStyle.Text = "Font Style";
             // 
-            // dlgFolder
-            // 
-            this.dlgFolder.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            this.dlgFolder.ShowNewFolderButton = false;
-            this.dlgFolder.HelpRequest += new System.EventHandler(this.dlgFolder_HelpRequest);
-            // 
             // sbFolder
             // 
             this.sbFolder.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatusFolder});
-            this.sbFolder.Location = new System.Drawing.Point(0, 425);
+            this.sbFolder.Location = new System.Drawing.Point(0, 451);
             this.sbFolder.Name = "sbFolder";
-            this.sbFolder.Size = new System.Drawing.Size(508, 22);
+            this.sbFolder.Size = new System.Drawing.Size(502, 22);
             this.sbFolder.TabIndex = 12;
             this.sbFolder.Text = "sbFolder";
             // 
@@ -195,33 +163,79 @@
             this.lblStatusFolder.Size = new System.Drawing.Size(85, 17);
             this.lblStatusFolder.Text = "lblStatusFolder";
             // 
+            // mmiMain
+            // 
+            this.mmiMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mmiFile});
+            this.mmiMain.Location = new System.Drawing.Point(0, 0);
+            this.mmiMain.Name = "mmiMain";
+            this.mmiMain.Size = new System.Drawing.Size(502, 24);
+            this.mmiMain.TabIndex = 13;
+            // 
+            // mmiFile
+            // 
+            this.mmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mmiOpenFolder,
+            this.mmiWindowsFolder,
+            this.toolStripSeparator1,
+            this.mmiExit});
+            this.mmiFile.Name = "mmiFile";
+            this.mmiFile.Size = new System.Drawing.Size(37, 20);
+            this.mmiFile.Text = "&File";
+            // 
+            // mmiOpenFolder
+            // 
+            this.mmiOpenFolder.Name = "mmiOpenFolder";
+            this.mmiOpenFolder.Size = new System.Drawing.Size(159, 22);
+            this.mmiOpenFolder.Text = "&Open Folder";
+            this.mmiOpenFolder.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            // 
+            // mmiWindowsFolder
+            // 
+            this.mmiWindowsFolder.Name = "mmiWindowsFolder";
+            this.mmiWindowsFolder.Size = new System.Drawing.Size(159, 22);
+            this.mmiWindowsFolder.Text = "&Windows Folder";
+            this.mmiWindowsFolder.Click += new System.EventHandler(this.windowsFolderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(156, 6);
+            // 
+            // mmiExit
+            // 
+            this.mmiExit.Name = "mmiExit";
+            this.mmiExit.Size = new System.Drawing.Size(159, 22);
+            this.mmiExit.Text = "&Exit";
+            this.mmiExit.Click += new System.EventHandler(this.mmiExit_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 447);
+            this.ClientSize = new System.Drawing.Size(502, 473);
             this.Controls.Add(this.sbFolder);
+            this.Controls.Add(this.mmiMain);
             this.Controls.Add(this.lblFontStyle);
             this.Controls.Add(this.lblSize);
             this.Controls.Add(this.lblFontName);
             this.Controls.Add(this.lblSample);
-            this.Controls.Add(this.lblSampleDesc);
             this.Controls.Add(this.edtSample);
-            this.Controls.Add(this.btnWindowsFolder);
-            this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.cbStyle);
             this.Controls.Add(this.speSize);
             this.Controls.Add(this.cbFonts);
             this.Controls.Add(this.lbFonts);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MainMenuStrip = this.mmiMain;
             this.Name = "frmMain";
             this.Text = "Font Browser .NET";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.speSize)).EndInit();
             this.sbFolder.ResumeLayout(false);
             this.sbFolder.PerformLayout();
+            this.mmiMain.ResumeLayout(false);
+            this.mmiMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,17 +247,19 @@
         private System.Windows.Forms.ComboBox cbFonts;
         private System.Windows.Forms.NumericUpDown speSize;
         private System.Windows.Forms.ComboBox cbStyle;
-        private System.Windows.Forms.Button btnOpenFolder;
-        private System.Windows.Forms.Button btnWindowsFolder;
         private System.Windows.Forms.TextBox edtSample;
-        private System.Windows.Forms.Label lblSampleDesc;
         private System.Windows.Forms.Label lblSample;
         private System.Windows.Forms.Label lblFontName;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Label lblFontStyle;
-        private System.Windows.Forms.FolderBrowserDialog dlgFolder;
         private System.Windows.Forms.StatusStrip sbFolder;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusFolder;
+        private System.Windows.Forms.MenuStrip mmiMain;
+        private System.Windows.Forms.ToolStripMenuItem mmiFile;
+        private System.Windows.Forms.ToolStripMenuItem mmiOpenFolder;
+        private System.Windows.Forms.ToolStripMenuItem mmiWindowsFolder;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mmiExit;
     }
 }
 
